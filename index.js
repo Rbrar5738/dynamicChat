@@ -14,16 +14,28 @@ app.get("/",(req,res)=>
     res.sendFile(fileName,options);
 });
 
-
+let users=0
 io.on("connection",(socket)=>{
     console.log("User Connected");
-
+    users++;
+    //io.sockets.emit is used to send message to all
+    // io.sockets.emit("numberOfUsers",`Number of users connected are ${users}`);
+    //socket is used to send connected user only
+    socket.emit("welcome","Welcome to chat");
+    //This is for that users who are already connected
+    socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
     // socket.emit("myMessage","Welcome to Server");
     // socket.on("clientMessage",(data)=>{
     //     console.log(data);
     // });
+    /*************Showing how many users connected t0 all ************* */
+ 
+
+
     socket.on("disconnect",()=>{
         console.log("User Disconnecte");
+        users--;
+        socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
     });
 
     

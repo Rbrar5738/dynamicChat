@@ -19,7 +19,16 @@
     //   socket.on("myMessage",(data)=>{
     //     document.write(data);
     //   });
-      socket.emit("clientMessage","Hello there my name is Ravinder Singh");
+    //   socket.emit("clientMessage","Hello there my name is Ravinder Singh");
+    /*************user connected message********************/
+    socket.on("numberOfUsers",(data)=>{
+        document.body.innerHTML="";
+        document.write(data);
+    });
+
+    socket.on("welcome",(data)=>{
+        document.write(data);
+    })
 
     </script>
 </body>
