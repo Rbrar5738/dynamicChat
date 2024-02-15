@@ -13,6 +13,14 @@
 
     <script>
         var socket=io();
+        // socket.on('message',function(data){
+        //     console.log(data);
+        // })
+    //   socket.on("myMessage",(data)=>{
+    //     document.write(data);
+    //   });
+      socket.emit("clientMessage","Hello there my name is Ravinder Singh");
+
     </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 var app=require("express")();
 var http=require("http").Server(app);
-
 const path=require("path");
 var io=require("socket.io")(http);
 
@@ -15,12 +14,19 @@ app.get("/",(req,res)=>
     res.sendFile(fileName,options);
 });
 
-io.on('connection',(socket)=>{
-    console.log("User connected");
 
+io.on("connection",(socket)=>{
+    console.log("User Connected");
+
+    // socket.emit("myMessage","Welcome to Server");
+    // socket.on("clientMessage",(data)=>{
+    //     console.log(data);
+    // });
     socket.on("disconnect",()=>{
-        console.log("User Disconnected");
+        console.log("User Disconnecte");
     });
+
+    
 });
 
 http.listen(port,()=>{
