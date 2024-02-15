@@ -15,15 +15,19 @@ app.get("/",(req,res)=>
 });
 
 let users=0
-io.on("connection",(socket)=>{
+var newIo=io.of('/custom');
+newIo.on("connection",(socket)=>{
     console.log("User Connected");
-    users++;
-    //io.sockets.emit is used to send message to all
+    // users++;
+
+    /**************io.sockets.emit is used to send message to all
     // io.sockets.emit("numberOfUsers",`Number of users connected are ${users}`);
-    //socket is used to send connected user only
+
+    /****************socket is used to send new user only*************/
     socket.emit("welcome","Welcome to chat");
+
     //This is for that users who are already connected
-    socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
+    // socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
     // socket.emit("myMessage","Welcome to Server");
     // socket.on("clientMessage",(data)=>{
     //     console.log(data);
@@ -32,11 +36,11 @@ io.on("connection",(socket)=>{
  
 
 
-    socket.on("disconnect",()=>{
-        console.log("User Disconnecte");
-        users--;
-        socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
-    });
+    // socket.on("disconnect",()=>{
+    //     console.log("User Disconnecte");
+    //     users--;
+    //     socket.broadcast.emit("numberOfUsers",`Number of users connected are ${users}`);
+    // });
 
     
 });

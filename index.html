@@ -12,7 +12,7 @@
     Hello World
 
     <script>
-        var socket=io();
+        var socket=io('/custom');
         // socket.on('message',function(data){
         //     console.log(data);
         // })
@@ -21,10 +21,10 @@
     //   });
     //   socket.emit("clientMessage","Hello there my name is Ravinder Singh");
     /*************user connected message********************/
-    socket.on("numberOfUsers",(data)=>{
-        document.body.innerHTML="";
-        document.write(data);
-    });
+    // socket.on("numberOfUsers",(data)=>{
+    //     document.body.innerHTML="";
+    //     document.write(data);
+    // });
 
     socket.on("welcome",(data)=>{
         document.write(data);
