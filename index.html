@@ -12,7 +12,7 @@
     Hello World
 
     <script>
-        var socket=io('/custom');
+        var socket=io();
         // socket.on('message',function(data){
         //     console.log(data);
         // })
@@ -26,10 +26,33 @@
     //     document.write(data);
     // });
 
-    socket.on("welcome",(data)=>{
-        document.write(data);
-    })
+    // socket.on("welcome",(data)=>{
+    //     document.write(data);
+    // })
 
+    /***************Rooms***************/
+    socket.on("welcome",(data)=>{
+        document.body.innerHTML=''
+        document.write(data);
+    });
+
+        /***************Error handeling on connection failed***********/
+        socket.on('connect_failed',()=>{
+            alert("Sorry connection failed");
+          });
+              /***************Error handeling on Reconnection failed***********/
+
+              socket.on('reconnect_failed',()=>{
+            alert("Sorry connection failed");
+          });
+          /************* for reconnect ****************************/
+          socket.on('reconnect',()=>{
+            alert("welcome back")
+          });
+            /************* for error ****************************/
+            socket.on('error',()=>{
+            alert("error message")
+          });
     </script>
 </body>
 </html>
