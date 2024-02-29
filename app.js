@@ -6,7 +6,7 @@ const userRoute = require("./routes/userRoute");
 
 mongoose.connect("mongodb://127.0.0.1:27017/chatApp");
 
-app.use("/", userRoute);
+// app.use("/", userRoute);
 
 const http = require("http").Server(app);
 const PORT = 8000;
