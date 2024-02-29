@@ -1,12 +1,12 @@
 const dotenv = require("dotenv").config();
-
 const mongoose = require("mongoose");
+const express = require("express");
+const app = express();
+const userRoute = require("./routes/userRoute");
 
 mongoose.connect("mongodb://127.0.0.1:27017/chatApp");
 
-const express = require("express");
-
-const app = express();
+app.use("/", userRoute);
 
 const http = require("http").Server(app);
 const PORT = 8000;
