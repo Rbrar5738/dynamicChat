@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Home</h1>
+    <script>
+     socket=io();
+     socket.on("welcome",(data)=>{
+      console.log(data);
+     });
+     socket.on("msg",(data)=>{
+      console.log(data);
+     });
+     socket.on("dis",(data)=>{
+      console.log(data);
+     });
+
+    </script>
+</body>
+</html>
