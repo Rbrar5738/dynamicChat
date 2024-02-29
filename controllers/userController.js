@@ -64,13 +64,13 @@ const handleLogin = async (req, res) => {
   }
 };
 
-// const dashboard = async (req, res) => {
-//   try {
-//     return res.render("dashboard", { user: req.session.user });
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// };
+const dashboard = async (req, res) => {
+  try {
+    return res.render("dashboard");
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 const logout = async (req, res) => {
   try {
@@ -89,4 +89,5 @@ module.exports = {
   login,
   handleLogin,
   logout,
+  dashboard,
 };
