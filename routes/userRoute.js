@@ -1,31 +1,35 @@
 const express = require("express");
 const userRoute = express();
 const path = require("path");
+const session = require("express-session");
+const { SESSION_SECRET } = process.env;
+userRoute.use(session({ secret: SESSION_SECRET }));
 const multer = require("multer");
 const userController = require("../controllers/userController");
 
-const bodyParser = require("body-parser");
-
-userRoute.use(bodyParser.json());
-userRoute.use(bodyParser.urlencoded({ extended: true }));
-userRoute.set("view engine", "ejs");
-userRoute.set("views", "./views");
-userRoute.use(express.static("public"));
-
-const storage = multer.diskStorage({
+const storagLocation = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/images"));
+    cb(null, path.resolve("./public/uploads"));
   },
   filename: function (req, file, cb) {
-    const fileName = Date.now() + file.originalname;
-    cb(null, fileName);
+    const filename = `${Date.now()}_${file.originalname}`;
+    cb(null, filename);
   },
 });
 
-const upload = multer({ strorage: storage });
-
+const upload = multer({ storage: storagLocation });
+userRoute.get("/", userController.home);
 userRoute.get("/register", userController.registerLoad);
 userRoute.post("/register", upload.single("image"), userController.register);
+
+userRoute.get("/login", userController.login);
+userRoute.post("/userlogin", userController.handleLogin);
+userRoute.get("/logout", userController.logout);
+
+// userRoute.get("/dashboard", userController.dashboard);
+userRoute.get("*", (req, res) => {
+  return res.redirect("/");
+});
 
 module.exports = {
   userRoute,

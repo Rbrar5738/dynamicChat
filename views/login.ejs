@@ -7,12 +7,8 @@
 <body>
   <%- include("partial/nav"); -%>
   <div class="container mt-4">
-  <form action="/register" method="post" enctype="multipart/form-data" style="width: 60%; box-shadow: 0 0 0 rgba(0,0,0,0.5);">
+  <form action="/userlogin" method="post">
 
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
-    </div>
 
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
@@ -25,10 +21,6 @@
     </div>
 
 
-    <div class="mb-3">
-      <label for="image" class="form-label">Select Picture</label>
-      <input type="file" class="form-control" id="image" name="image" aria-describedby="emailHelp">
-    </div>
 
 
    
@@ -38,11 +30,11 @@
 
   <% 
 
-    if(typeof message!= 'undefined'){
+    if(typeof errorLoginMessage != 'undefined'){
       %>
       <div class="container">
-        <div class="alert alert-success" role="alert" style="width: 60%;">
-          <%= message %>
+        <div class="alert alert-danger" role="alert" style="width: 60%;">
+          <%= errorLoginMessage %>
         </div>
         </div>
         
