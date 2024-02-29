@@ -2,6 +2,7 @@ const express = require("express");
 const userRoute = express();
 const path = require("path");
 const session = require("express-session");
+const auth = require("../middlewares/auth");
 const { SESSION_SECRET } = process.env;
 userRoute.use(session({ secret: SESSION_SECRET }));
 const multer = require("multer");
