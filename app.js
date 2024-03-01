@@ -14,7 +14,7 @@ const usp = io.of("/user-namescpace");
 usp.on("connection", async (socket) => {
   console.log("User Connected");
 
-  // userModel.
+  userModel.
 
   socket.on("disconnect", () => {
     console.log("User Disonnected");
