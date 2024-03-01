@@ -52,7 +52,13 @@ const handleLogin = async (req, res) => {
       );
       if (comparedPassword) {
         req.session.user = userData;
-        return res.render("dashboard", { user: req.session.user });
+        const users = await userModel.find({
+          _id: { $nin: [req.session.user._id] },
+        });
+        return res.render("dashboard", {
+          user: req.session.user,
+          users: users,
+        });
       } else {
         return res.render("login", { errorLoginMessage: "Incoorect Password" });
       }

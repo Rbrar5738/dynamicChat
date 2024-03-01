@@ -1,0 +1,47 @@
+#mainContainer{
+  width: 100%;
+  height: 100vh;
+  background-color: aliceblue;
+  display: grid;
+  grid-template-columns: 10% 80%;
+}
+#side
+{
+  border-right: 2px solid black;
+}
+#side ul{
+  padding-left: 0;
+}
+#side ul li{
+  list-style-type: none;
+  padding: 15px 0;
+  text-align: center;
+ 
+}
+#side ul li a
+{
+  width: 100%;  
+  height: 100%;
+  font-size: 1.3rem;
+  font-weight: 1000;
+  text-decoration: none;
+  color:black
+}
+
+#side ul li:hover {
+  background-color: black;
+  color:white
+}
+#side ul li:hover a{
+  background-color: black;
+  color:white
+}
+#main{
+  padding:15px;
+}
+#main h3{
+  text-align: center;
+}
+.cursor-pointer{
+  cursor: pointer;
+}

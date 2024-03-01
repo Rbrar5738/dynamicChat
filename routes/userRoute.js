@@ -27,7 +27,6 @@ userRoute.get("/login", auth.isLogout, userController.login);
 userRoute.post("/userlogin", userController.handleLogin);
 userRoute.get("/logout", auth.isLogin, userController.logout);
 
-userRoute.get("/dashboard", auth.isLogin, userController.dashboard);
 userRoute.get("*", (req, res) => {
   return res.redirect("/");
 });

@@ -13,7 +13,7 @@ const isLogin = (req, res, next) => {
 const isLogout = (req, res, next) => {
   try {
     if (req.session.user) {
-      return res.redirect("/dashboard");
+      return res.redirect("/");
     } else {
     }
     next();
