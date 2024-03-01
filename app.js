@@ -1,6 +1,7 @@
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
+const userModel = require("./models/userModel");
 const app = express();
 
 const bodyParser = require("body-parser");
@@ -10,8 +11,10 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const usp = io.of("/user-namescpace");
 
-usp.on("connection", (socket) => {
+usp.on("connection", async (socket) => {
   console.log("User Connected");
+
+  // userModel.
 
   socket.on("disconnect", () => {
     console.log("User Disonnected");
