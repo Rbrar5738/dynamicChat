@@ -24,12 +24,15 @@ usp.on("connection", async (socket) => {
   );
 
   //Broadcast for all users for online status
+  socket.broadcast.emit("getOnlineUser", { userId: userId });
 
   socket.on("disconnect", async () => {
     await userModel.findByIdAndUpdate(
       { _id: userId },
       { $set: { is_online: "0" } }
     );
+    //Broadcast for all users for Offline status
+    socket.broadcast.emit("getOfflineUser", { userId: userId });
     console.log("User Disonnected");
   });
 });

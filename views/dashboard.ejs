@@ -34,11 +34,11 @@
 
                           <% if(users[i]['is_online']==1)
                           { %>
-                            <sup class="online-status" id="<%= users[i]._id %>">Online</sup>  
+                            <sup class="online-status" id="<%= users[i]._id %>-status">Online</sup>  
                           <% }
                           else
                           { %>
-                            <sup class="offline-status" id="<%= users[i]._id %>">Offline</sup> 
+                            <sup class="offline-status" id="<%= users[i]._id %>-status">Offline</sup> 
                               
                             <% } %>
                         </li>
@@ -79,6 +79,19 @@
             $(".start-head").hide();
             $(".chat-section").show();
           });
+        });
+
+        //Get user online status
+        socket.on("getOnlineUser", function(data){
+            $("#"+data.userId+'-status').text('Online');
+            $("#"+data.userId+'-status').removeClass('offline-status')
+            $("#"+data.userId+'-status').addClass('online-status')
+        });
+
+        socket.on("getOfflineUser", function(data){
+            $("#"+data.userId+'-status').text('Offline');
+            $("#"+data.userId+'-status').removeClass('online-status')
+            $("#"+data.userId+'-status').addClass('offline-status')
         });
 
   </script>
