@@ -62,3 +62,9 @@
 .chat-section{
   display: none;
 }
+.offline-status{
+  color:red;
+}
+.online-status{
+  color:green;
+}

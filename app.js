@@ -1,7 +1,7 @@
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
-const userModel = require("./models/userModel");
+const { userModel } = require("./models/userModel");
 const app = express();
 
 const bodyParser = require("body-parser");
@@ -14,9 +14,22 @@ const usp = io.of("/user-namescpace");
 usp.on("connection", async (socket) => {
   console.log("User Connected");
 
-  userModel.
+  // console.log(socket);
+  // console.log(socket.handshake.auth.token);
+  const userId = socket.handshake.auth.token;
 
-  socket.on("disconnect", () => {
+  await userModel.findByIdAndUpdate(
+    { _id: userId },
+    { $set: { is_online: "1" } }
+  );
+
+  //Broadcast for all users for online status
+
+  socket.on("disconnect", async () => {
+    await userModel.findByIdAndUpdate(
+      { _id: userId },
+      { $set: { is_online: "0" } }
+    );
     console.log("User Disonnected");
   });
 });

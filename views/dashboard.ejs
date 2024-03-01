@@ -31,6 +31,16 @@
                       <li class="list-group-item list-group-item-dark cursor-pointer user-list">
                         <img src="<%= users[i].image %>" height="50px" width="50px">
                           <%= users[i].name %>
+
+                          <% if(users[i]['is_online']==1)
+                          { %>
+                            <sup class="online-status" id="<%= users[i]._id %>">Online</sup>  
+                          <% }
+                          else
+                          { %>
+                            <sup class="offline-status" id="<%= users[i]._id %>">Offline</sup> 
+                              
+                            <% } %>
                         </li>
                   <% } %>
                       <% } %>
@@ -63,7 +73,7 @@
           token:senderId,
         }
       });
-      
+
         $(document).ready(function(){
           $(".list-group").click(function(){
             $(".start-head").hide();
