@@ -4,6 +4,7 @@ const path = require("path");
 const session = require("express-session");
 const auth = require("../middlewares/auth");
 const { SESSION_SECRET } = process.env;
+
 userRoute.use(
   session({ resave: false, saveUninitialized: true, secret: SESSION_SECRET })
 );
@@ -21,6 +22,7 @@ const storagLocation = multer.diskStorage({
 });
 
 const upload = multer({ storage: storagLocation });
+
 userRoute.get("/", userController.home);
 userRoute.get("/register", userController.registerLoad);
 userRoute.post("/register", upload.single("image"), userController.register);
