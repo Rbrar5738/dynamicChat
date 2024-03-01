@@ -27,9 +27,9 @@ userRoute.get("/", userController.home);
 userRoute.get("/register", userController.registerLoad);
 userRoute.post("/register", upload.single("image"), userController.register);
 
-userRoute.get("/login", auth.isLogout, userController.login);
+userRoute.get("/login", userController.login);
 userRoute.post("/userlogin", userController.handleLogin);
-userRoute.get("/logout", auth.isLogin, userController.logout);
+userRoute.get("/logout", userController.logout);
 
 userRoute.get("*", (req, res) => {
   return res.redirect("/");

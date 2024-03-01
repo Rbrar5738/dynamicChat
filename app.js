@@ -2,6 +2,8 @@ const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+const io = require("socket.io")(http);
+
 const bodyParser = require("body-parser");
 const { userRoute } = require("./routes/userRoute");
 const http = require("http").Server(app);
