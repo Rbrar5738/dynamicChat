@@ -4,7 +4,9 @@ const path = require("path");
 const session = require("express-session");
 const auth = require("../middlewares/auth");
 const { SESSION_SECRET } = process.env;
-userRoute.use(session({ secret: SESSION_SECRET }));
+userRoute.use(
+  session({ resave: false, saveUninitialized: true, secret: SESSION_SECRET })
+);
 const multer = require("multer");
 const userController = require("../controllers/userController");
 
