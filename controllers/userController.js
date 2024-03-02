@@ -89,18 +89,19 @@ const logout = async (req, res) => {
   }
 };
 
-
 //Chat models
-const saveChat=async(req,res)=>{
-  try{
-     await chatModel.create({
-        sender_id:req.body.sender_id,
-        reciever_id:req.body.reciever_id,
-        messgae:req.body.message,
-      })
-}catch(error)(
-  res.status(400).send({success:false,msg:errir.message});
-)
+const saveChat = async (req, res) => {
+  try {
+    const chat = await chatModel.create({
+      sender_id: req.body.sender_id,
+      reciver_id: req.body.reciever_id,
+      messgae: req.body.message,
+    });
+    res.status(200).send({ success: true, msg: "Chat saved successfully" });
+  } catch (error) {
+    res.status(400).send({ success: false, msg: error.message });
+  }
+};
 
 module.exports = {
   registerLoad,

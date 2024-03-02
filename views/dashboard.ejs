@@ -52,7 +52,7 @@
 
               </div>
 
-              <form action="" id="chat-form">
+              <form action="/save-chat" id="chat-form">
                 <input type="text" name="message" class="chat-input" placeholder="Enter message" required>
                 <input type="submit" value="Send Message" class="btn btn-primary">
               </form>
@@ -93,6 +93,11 @@
         $("#" + data.userId + '-status').text('Offline');
         $("#" + data.userId + '-status').removeClass('online-status')
         $("#" + data.userId + '-status').addClass('offline-status')
+      });
+
+      $("#chat-form").submit(function (event) {
+        event.preventDefault();
+        var message = $("message").val();
       });
 
     </script>
