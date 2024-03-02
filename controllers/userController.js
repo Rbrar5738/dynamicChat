@@ -91,6 +91,7 @@ const logout = async (req, res) => {
 
 //Chat models
 const saveChat = async (req, res) => {
+  console.log(req.body);
   try {
     const chat = await chatModel.create({
       sender_id: req.body.sender_id,

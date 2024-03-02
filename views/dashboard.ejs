@@ -75,8 +75,10 @@
         });
 
       $(document).ready(function () {
-        $(".list-group").click(function () {
+        $(".user-list").click(function () {
+
           reciever_id = $(this).attr("data-id");
+
           $(".start-head").hide();
           $(".chat-section").show();
         });
@@ -84,16 +86,17 @@
         $("#chat-form").submit(function (event) {
           event.preventDefault();
           var message = $("#message").val();
-          console.log("hi");
+          // console.log(reciever_id)
           //To save data in chat table
           $.ajax({
             url: "/save-chat",
             type: 'POST',
             data: { sender_id: senderId, reciever_id: reciever_id, message: message },
-            success: function (data) {
 
-              if (data.success) {
-                console.log(data);
+            success: function (data) {
+              console.log("done");
+              if (data) {
+                console.log();
                 $("message").val("");
                 let chat = data.message;
                 let html = `
