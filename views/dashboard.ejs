@@ -137,15 +137,15 @@
       socket.on("load-new-chat", (data) => {
 
 
-        if (senderId == data.sender_id && reciever_id == data.reciever_id) {
+        if (senderId == data.reciver_id && reciever_id == data.sender_id) {
           let html = `
             <div class="distance_user_chat">
                      <h5>${data.message}</h5>
               </div>
             `;
           $(".chat-container").append(html);
-          // }
-        });
+        }
+      });
 
     </script>
 
