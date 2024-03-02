@@ -25,6 +25,10 @@ usp.on("connection", async (socket) => {
 
   //Broadcast for all users for online status
   socket.broadcast.emit("getOnlineUser", { userId: userId });
+  //Chattin is started
+  socket.on("new-chat", (data) => {
+    socket.broadcast.emit("load-new-chat", data);
+  });
 
   socket.on("disconnect", async () => {
     await userModel.findByIdAndUpdate(

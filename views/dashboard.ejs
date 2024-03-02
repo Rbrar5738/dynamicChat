@@ -84,6 +84,7 @@
         });
 
         $("#chat-form").submit(function (event) {
+
           event.preventDefault();
           var message = $("#message").val();
           // console.log(reciever_id)
@@ -93,21 +94,24 @@
             type: 'POST',
             data: { sender_id: senderId, reciever_id: reciever_id, message: message },
 
-            success: function (data) {
-              console.log("done");
-              if (data) {
-                console.log();
-                $("message").val("");
-                let chat = data.message;
+            success: function (response) {
+
+              if (response.success) {
+                $("#message").val("");
+                let chat = response.data.message;
+
                 let html = `
             <div class="current_user_chat">
                      <h5>${chat}</h5>
               </div>
             `;
+                $(".chat-container").append(html);
+                socket.emit("new-chat", response.data);
               } else {
                 alert(data.msg);
               }
             }
+
 
           });
 
@@ -129,6 +133,19 @@
       });
 
 
+      // Showing message to a given user only
+      socket.on("load-new-chat", (data) => {
+
+
+        if (senderId == data.sender_id && reciever_id == data.reciever_id) {
+          let html = `
+            <div class="distance_user_chat">
+                     <h5>${data.message}</h5>
+              </div>
+            `;
+          $(".chat-container").append(html);
+          // }
+        });
 
     </script>
 

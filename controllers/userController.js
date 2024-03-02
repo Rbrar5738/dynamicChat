@@ -91,13 +91,13 @@ const logout = async (req, res) => {
 
 //Chat models
 const saveChat = async (req, res) => {
-  console.log(req.body);
   try {
     const chat = await chatModel.create({
       sender_id: req.body.sender_id,
       reciver_id: req.body.reciever_id,
       message: req.body.message,
     });
+
     res
       .status(200)
       .send({ success: true, msg: "Chat saved successfully", data: chat });
