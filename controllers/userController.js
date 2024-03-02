@@ -1,4 +1,5 @@
 const { userModel } = require("../models/userModel");
+const { chatModel } = require("../models/chatModel");
 const bcrypt = require("bcrypt");
 
 const home = async (req, res) => {
@@ -88,6 +89,19 @@ const logout = async (req, res) => {
   }
 };
 
+
+//Chat models
+const saveChat=async(req,res)=>{
+  try{
+     await chatModel.create({
+        sender_id:req.body.sender_id,
+        reciever_id:req.body.reciever_id,
+        messgae:req.body.message,
+      })
+}catch(error)(
+  res.status(400).send({success:false,msg:errir.message});
+)
+
 module.exports = {
   registerLoad,
   register,
@@ -96,4 +110,5 @@ module.exports = {
   handleLogin,
   logout,
   dashboard,
+  saveChat,
 };

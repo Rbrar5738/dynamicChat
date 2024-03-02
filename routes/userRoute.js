@@ -35,6 +35,9 @@ userRoute.get("*", (req, res) => {
   return res.redirect("/");
 });
 
+//Chat routes
+userRoute.post("/save-chat", userController.saveChat);
+
 module.exports = {
   userRoute,
 };

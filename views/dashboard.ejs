@@ -66,7 +66,7 @@
     </div>
     <script>
       let senderId = "<%= user._id %>";
-
+      let reciever_id = "";
       let socket = io("/user-namescpace",
         {
           auth: {
@@ -76,6 +76,7 @@
 
       $(document).ready(function () {
         $(".list-group").click(function () {
+          reciever_id = $(this).attr("data-id");
           $(".start-head").hide();
           $(".chat-section").show();
         });

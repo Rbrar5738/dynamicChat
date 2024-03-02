@@ -17,11 +17,11 @@ const chatSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: strue }
+  { timestamps: true }
 );
 
-const userModel = mongoose.model("chat", userSchema);
+const chatModel = mongoose.model("chat", chatSchema);
 
 module.exports = {
-  userModel,
+  chatModel,
 };
