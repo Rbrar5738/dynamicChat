@@ -95,9 +95,11 @@ const saveChat = async (req, res) => {
     const chat = await chatModel.create({
       sender_id: req.body.sender_id,
       reciver_id: req.body.reciever_id,
-      messgae: req.body.message,
+      message: req.body.message,
     });
-    res.status(200).send({ success: true, msg: "Chat saved successfully" });
+    res
+      .status(200)
+      .send({ success: true, msg: "Chat saved successfully", data: chat });
   } catch (error) {
     res.status(400).send({ success: false, msg: error.message });
   }

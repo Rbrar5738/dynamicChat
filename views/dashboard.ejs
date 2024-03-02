@@ -52,8 +52,8 @@
 
               </div>
 
-              <form action="/save-chat" id="chat-form">
-                <input type="text" name="message" class="chat-input" placeholder="Enter message" required>
+              <form action=" " id="chat-form">
+                <input type="text" name="message" id="message" class="chat-input" placeholder="Enter message" required>
                 <input type="submit" value="Send Message" class="btn btn-primary">
               </form>
             </div>
@@ -80,6 +80,36 @@
           $(".start-head").hide();
           $(".chat-section").show();
         });
+
+        $("#chat-form").submit(function (event) {
+          event.preventDefault();
+          var message = $("#message").val();
+          console.log("hi");
+          //To save data in chat table
+          $.ajax({
+            url: "/save-chat",
+            type: 'POST',
+            data: { sender_id: senderId, reciever_id: reciever_id, message: message },
+            success: function (data) {
+
+              if (data.success) {
+                console.log(data);
+                $("message").val("");
+                let chat = data.message;
+                let html = `
+            <div class="current_user_chat">
+                     <h5>${chat}</h5>
+              </div>
+            `;
+              } else {
+                alert(data.msg);
+              }
+            }
+
+          });
+
+        });
+
       });
 
       //Get user online status
@@ -95,10 +125,7 @@
         $("#" + data.userId + '-status').addClass('offline-status')
       });
 
-      $("#chat-form").submit(function (event) {
-        event.preventDefault();
-        var message = $("message").val();
-      });
+
 
     </script>
 

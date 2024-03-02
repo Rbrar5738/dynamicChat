@@ -30,13 +30,12 @@ userRoute.post("/register", upload.single("image"), userController.register);
 userRoute.get("/login", userController.login);
 userRoute.post("/userlogin", userController.handleLogin);
 userRoute.get("/logout", userController.logout);
-
+userRoute.post("/save-chat", userController.saveChat);
 userRoute.get("*", (req, res) => {
   return res.redirect("/");
 });
 
 //Chat routes
-userRoute.post("/save-chat", userController.saveChat);
 
 module.exports = {
   userRoute,
