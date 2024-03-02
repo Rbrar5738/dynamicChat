@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
- 
-<%- include("partial/head"); -%>
+
+  <%- include("partial/head"); -%>
 </head>
+
 <body>
   <%- include("partial/nav"); -%>
 
@@ -12,92 +14,91 @@
         <ul>
           <li><a href="#">Home</a></li>
           <li><a href="#">Chat</a></li>
-          
+
         </ul>
       </div>
       <div id="main">
         <h1>Welcome,
           <% if(locals.user) {%>
             <%= user.name %>
-            <%}%>
-          </h1>
-          <div class="row">
-              <div class="col-md-3">
-                <ul class="list-group">
-                  <% if(users.length > 0){
-                    for(let i=0; i < users.length ; i++)
-                    {
-                  %>
-                      <li class="list-group-item list-group-item-dark cursor-pointer user-list">
-                        <img src="<%= users[i].image %>" height="50px" width="50px">
-                          <%= users[i].name %>
+              <%}%>
+        </h1>
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="list-group">
+              <% if(users.length> 0){
+                for(let i=0; i < users.length ; i++) { %>
+                  <li class="list-group-item list-group-item-dark cursor-pointer user-list"
+                    data-id="<%= users[i]._id %>">
+                    <img src="<%= users[i].image %>" height="50px" width="50px">
+                    <%= users[i].name %>
 
-                          <% if(users[i]['is_online']==1)
-                          { %>
-                            <sup class="online-status" id="<%= users[i]._id %>-status">Online</sup>  
-                          <% }
-                          else
-                          { %>
-                            <sup class="offline-status" id="<%= users[i]._id %>-status">Offline</sup> 
-                              
-                            <% } %>
-                        </li>
+                      <% if(users[i]['is_online']==1) { %>
+                        <sup class="online-status" id="<%= users[i]._id %>-status">Online</sup>
+                        <% } else { %>
+                          <sup class="offline-status" id="<%= users[i]._id %>-status">Offline</sup>
+
+                          <% } %>
+                  </li>
                   <% } %>
-                      <% } %>
-                  </ul>
-              </div>
-
-              <div class="col-md-9">
-                <h3 class="start-head" >Click on user to start a new chat</h3>
-                <div class="chat-section">
-                  <div class="chat-container"></div>  
-
-                  <form action="" id="chat-form">
-                    <input type="text" name="message" class="chat-input" placeholder="Enter message" required>
-                      <input type="submit" value="Send Message" class="btn btn-primary">
-                    </form>
-                </div>
-                
-              </div>
-            </div>
+                    <% } %>
+            </ul>
           </div>
-         
+
+          <div class="col-md-9">
+            <h3 class="start-head">Click on user to start a new chat</h3>
+            <div class="chat-section">
+              <div class="chat-container">
+
+              </div>
+
+              <form action="" id="chat-form">
+                <input type="text" name="message" class="chat-input" placeholder="Enter message" required>
+                <input type="submit" value="Send Message" class="btn btn-primary">
+              </form>
+            </div>
+
+          </div>
+        </div>
       </div>
+
+    </div>
     </div>
     <script>
-      let senderId="<%= user._id %>";
-      
-      let socket=io("/user-namescpace",
-      {
-        auth:{
-          token:senderId,
-        }
+      let senderId = "<%= user._id %>";
+
+      let socket = io("/user-namescpace",
+        {
+          auth: {
+            token: senderId,
+          }
+        });
+
+      $(document).ready(function () {
+        $(".list-group").click(function () {
+          $(".start-head").hide();
+          $(".chat-section").show();
+        });
       });
 
-        $(document).ready(function(){
-          $(".list-group").click(function(){
-            $(".start-head").hide();
-            $(".chat-section").show();
-          });
-        });
+      //Get user online status
+      socket.on("getOnlineUser", function (data) {
+        $("#" + data.userId + '-status').text('Online');
+        $("#" + data.userId + '-status').removeClass('offline-status')
+        $("#" + data.userId + '-status').addClass('online-status')
+      });
 
-        //Get user online status
-        socket.on("getOnlineUser", function(data){
-            $("#"+data.userId+'-status').text('Online');
-            $("#"+data.userId+'-status').removeClass('offline-status')
-            $("#"+data.userId+'-status').addClass('online-status')
-        });
+      socket.on("getOfflineUser", function (data) {
+        $("#" + data.userId + '-status').text('Offline');
+        $("#" + data.userId + '-status').removeClass('online-status')
+        $("#" + data.userId + '-status').addClass('offline-status')
+      });
 
-        socket.on("getOfflineUser", function(data){
-            $("#"+data.userId+'-status').text('Offline');
-            $("#"+data.userId+'-status').removeClass('online-status')
-            $("#"+data.userId+'-status').addClass('offline-status')
-        });
-
-  </script>
+    </script>
 
 
 
 
 </body>
+
 </html>

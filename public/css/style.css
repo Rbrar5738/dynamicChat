@@ -69,3 +69,11 @@
 .online-status{
   color:green;
 }
+.current_user_chat{
+  text-align: right;
+  margin: 10px;
+}
+.distance_user_chat{
+  text-align: left;
+  margin: 10px;
+}
